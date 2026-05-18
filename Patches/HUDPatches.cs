@@ -15,7 +15,6 @@ public static class HUDPatches
     // Level Display
     private static GameObject? _levelObject;
     private static TextMeshProUGUI? _levelText;
-    private static bool _levelCreateAttempted;
     private static float _levelLastFontSize;
     private static float _levelLastPosX;
     private static float _levelLastPosY;
@@ -23,7 +22,6 @@ public static class HUDPatches
     // Stage Timer
     private static GameObject? _timerObject;
     private static TextMeshProUGUI? _timerText;
-    private static bool _timerCreateAttempted;
     private static float _timerLastFontSize;
     private static float _timerLastPosX;
     private static float _timerLastPosY;
@@ -90,8 +88,6 @@ public static class HUDPatches
             _timerObject = null;
             _timerText = null;
         }
-        _levelCreateAttempted = false;
-        _timerCreateAttempted = false;
         _running = false;
         _stageCleared = false;
         _cachedFont = null;
@@ -102,8 +98,6 @@ public static class HUDPatches
     {
         if (_levelObject == null)
         {
-            if (_levelCreateAttempted) return;
-            _levelCreateAttempted = true;
             _levelText = null;
             CreateHUDElement(ref _levelObject, ref _levelText, "LevelDisplay HUD",
                 Plugin.LevelFontSize.Value, Plugin.LevelPositionX.Value, Plugin.LevelPositionY.Value,
@@ -133,8 +127,6 @@ public static class HUDPatches
     {
         if (_timerObject == null)
         {
-            if (_timerCreateAttempted) return;
-            _timerCreateAttempted = true;
             _timerText = null;
             CreateHUDElement(ref _timerObject, ref _timerText, "StageTimer HUD",
                 Plugin.TimerFontSize.Value, Plugin.TimerPositionX.Value, Plugin.TimerPositionY.Value,
@@ -166,16 +158,23 @@ public static class HUDPatches
     {
         if (_gameHudTransform == null)
         {
-            var gameHud = GameObject.Find("Game Hud");
-            if (gameHud == null) return;
-            _gameHudTransform = gameHud.transform;
+            // Use HUD.instance (always available) instead of GameObject.Find
+            if (HUD.instance == null || HUD.instance.hideParent == null) return;
+            _gameHudTransform = HUD.instance.hideParent.transform;
         }
 
         if (_cachedFont == null)
         {
-            var taxHaul = GameObject.Find("Tax Haul");
-            if (taxHaul == null) return;
-            _cachedFont = taxHaul.GetComponent<TMP_Text>()?.font;
+            // Find any TMP font in the scene instead of relying on a specific object name
+            var allTexts = Resources.FindObjectsOfTypeAll<TMP_Text>();
+            foreach (var t in allTexts)
+            {
+                if (t.font != null)
+                {
+                    _cachedFont = t.font;
+                    break;
+                }
+            }
             if (_cachedFont == null) return;
         }
 
