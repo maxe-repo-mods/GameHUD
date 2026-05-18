@@ -1,7 +1,7 @@
 {
   "name": "GameHUD",
   "version_number": "1.0.0",
-  "website_url": "",
+  "website_url": "https://github.com/maxe-repo-mods/GameHUD",
   "description": "Displays level number and stage timer on the HUD (Tab key or always-on).",
   "dependencies": [
     "BepInEx-BepInExPack-5.4.2100"
