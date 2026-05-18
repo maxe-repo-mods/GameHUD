@@ -42,12 +42,12 @@ public class Plugin : BaseUnityPlugin
             "Enable the level number display."
         );
         LevelPositionX = Config.Bind(
-            "Level Display", "PositionX", -10,
-            new ConfigDescription("HUD X offset from top-right corner", new AcceptableValueRange<int>(-1000, 1000))
+            "Level Display", "PositionX", 285,
+            new ConfigDescription("HUD X offset", new AcceptableValueRange<int>(-1000, 1000))
         );
         LevelPositionY = Config.Bind(
-            "Level Display", "PositionY", -10,
-            new ConfigDescription("HUD Y offset from top-right corner", new AcceptableValueRange<int>(-1000, 1000))
+            "Level Display", "PositionY", 60,
+            new ConfigDescription("HUD Y offset", new AcceptableValueRange<int>(-1000, 1000))
         );
         LevelFontSize = Config.Bind(
             "Level Display", "FontSize", 22,
@@ -64,12 +64,12 @@ public class Plugin : BaseUnityPlugin
             "Enable the stage timer display."
         );
         TimerPositionX = Config.Bind(
-            "Stage Timer", "PositionX", -10,
-            new ConfigDescription("HUD X offset from top-right corner", new AcceptableValueRange<int>(-1000, 1000))
+            "Stage Timer", "PositionX", 285,
+            new ConfigDescription("HUD X offset", new AcceptableValueRange<int>(-1000, 1000))
         );
         TimerPositionY = Config.Bind(
-            "Stage Timer", "PositionY", -60,
-            new ConfigDescription("HUD Y offset from top-right corner", new AcceptableValueRange<int>(-1000, 1000))
+            "Stage Timer", "PositionY", 40,
+            new ConfigDescription("HUD Y offset", new AcceptableValueRange<int>(-1000, 1000))
         );
         TimerFontSize = Config.Bind(
             "Stage Timer", "FontSize", 20,
