@@ -47,6 +47,11 @@ dotnet build -c Release
 
 Output: `bin/Release/netstandard2.1/GameHUD.dll`
 
+
+## AI Disclosure
+
+This mod was developed with the assistance of AI (Claude by Anthropic). All code has been reviewed and tested by the developer.
+
 ## License
 
 MIT
